@@ -30,7 +30,7 @@ ssh root@localhost -p 2222 \
     -L 22222:internal-server:22
 ```
 
-### SSH ProxyJump
+### SSH ProxyJump using LocalForward
 
 `~/.ssh/config`
 
@@ -53,3 +53,21 @@ Host internal-server
 # First, input bastion password, then input internal-server password.
 ssh internal-server
 ```
+
+### SSH Dynamic port forward
+
+```bash
+ssh root@localhost -p 2222 -D 10080
+```
+
+Add proxy address to proxychains config.
+
+```bash
+echo "socks5 127.0.0.1 10080" >> /etc/proxychains4.conf
+```
+
+```bash
+proxychains4 -q /bin/bash
+```
+
+From now on, communication generated from this shell will go through the proxy.

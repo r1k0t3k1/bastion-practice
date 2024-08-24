@@ -1,0 +1,14 @@
+services:
+  bastion:
+    container_name: bastion
+    hostname: bastion
+    build:
+      context: ./bastion
+    ports:
+      - 0.0.0.0:2222:22
+
+  internal-server:
+    container_name: internal-server
+    hostname: internal-server
+    build:
+      context: ./internal-server
